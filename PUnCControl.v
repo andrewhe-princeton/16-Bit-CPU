@@ -307,9 +307,7 @@ module PUnCControl(
 				PC_inc = 0;
 
 			end
-	
-	+
-	
+
 
 
 			STATE_LDI_PLUS_Read_One: begin
@@ -506,15 +504,15 @@ module PUnCControl(
 				selectALU = 3'd4;
 				IR_ld = 0;
 			end
-			/*STATE_STI_Read_Three: begin
+			STATE_STI_Read_Three: begin
 				readCtrAddr = 3'd5;
 				PC_inc = 0;
 			end
 			STATE_STI_Read_Four: begin
 				readCtrAddr = 3'd5;
 				PC_inc = 0;
-			end*/
-			/*STATE_STI_Write_One: begin
+			end
+			STATE_STI_Write_One: begin
 				memWriteEn = 1;
 				W_addrSelect_M = 2'd0;
 				PC_inc = 0;
@@ -539,13 +537,34 @@ module PUnCControl(
 					WRITE_offset =  16'd0 | ir[8:0];
 				end
 				selectALU = 3'd4;
-			 end*/
+			 end
 
 			STATE_STR_Read_One: begin
 				memWriteEn = 0;
 				regFile_w_en = 0;
-				regFile_r_addr_0= ir[8:6];
+
+				regFile_r_addr_0= ir[11:9];
+
+				W_addrSelect_M = 2'd1;
+
+				if (ir[5] == 1) begin
+					WRITE_offset = 16'b1111111111000000 | ir[5:0];
+				end
+				else begin
+					WRITE_offset =  16'd0 | ir[5:0];
+				end 
+				selectALU = 3'd4;
 				PC_inc = 0;
+
+				// regFile_r_addr_0= ir[8:6];
+				// if (ir[5] == 1) begin
+				// 	WRITE_offset = 16'b1111111111000000 | ir[5:0];
+				// end
+				// else begin
+				// 	WRITE_offset =  16'd0 | ir[5:0];
+				// end 
+				// selectALU = 3'd4;
+				// PC_inc = 0;
 			end
 			STATE_STR_Read_Two: begin
 				regFile_w_en = 0;
@@ -558,17 +577,18 @@ module PUnCControl(
 					WRITE_offset = 16'b1111111111000000 | ir[5:0];
 				end
 				else begin
-					WRITE_offset =  16'd0 | ir[8:0];
+					WRITE_offset =  16'd0 | ir[5:0];
 				end 
-				selectALU = 3'd4;
+				selectALU = 3'd3;
 				PC_inc = 0;
 
 			end
 			STATE_STR_Write_One: begin
 				memWriteEn = 1;
-				regFile_r_addr_0= ir[11:9];
+				
+				regFile_r_addr_0= ir[8:6];
 
-				W_addrSelect_M = 2'd0;
+				W_addrSelect_M = 2'd1;
 
 				if (ir[5] == 1) begin
 					WRITE_offset = 16'b1111111111000000 | ir[5:0];
@@ -576,12 +596,12 @@ module PUnCControl(
 				else begin
 					WRITE_offset =  16'd0 | ir[5:0];
 				end 
-				selectALU = 3'd4;
+				selectALU = 3'd3;
 				PC_inc = 0;
 			end
 			STATE_STR_Write_Two: begin
 				
-				memWriteEn = 1;
+				memWriteEn = 0;
 				regFile_r_addr_0= ir[11:9];
 
 				W_addrSelect_M = 2'd0;

@@ -217,7 +217,23 @@ module PUnCTATest;
 		`ASSERT_REG_EQ(1, 16'd3);
 		`ASSERT_MEM_EQ(23, 16'd3);
 
-		// ADD YOUR TEST HERE!
+
+		// This is our version of a sort. It increments through a 
+		// location in memory for a specified number of elemnents.
+		// It has 2 pointers, one for pointing to a leader and another
+		// for a follower. If the leader is smaller than the follower,
+		// it performas a memory swap. Every time it encounters a swap,
+		// the pointers are reset 
+		`START_TEST("sort");
+		`WAIT_PC_FREEZE;
+		`ASSERT_MEM_EQ(16'd26, 16'd1);
+		`ASSERT_MEM_EQ(16'd27, 16'd2);
+		`ASSERT_MEM_EQ(16'd28, 16'd3);
+		`ASSERT_MEM_EQ(16'd29, 16'd4);
+		`ASSERT_MEM_EQ(16'd30, 16'd5);
+
+
+		
 
 		$display("\n----------------------------");
 		$display("--- Completed %d Tests  ----", test_cnt);

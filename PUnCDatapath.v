@@ -249,7 +249,7 @@ begin
         ALU_Output = ~(ALU_A);
     end
     if (selectALU == 3'd3) begin             // 3: Write Condition Set?
-        //
+        ALU_Output = ALU_Output;
     end
     if (selectALU == 3'd4) begin
         ALU_Output = ALU_A;
