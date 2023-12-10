@@ -11,20 +11,20 @@
 1B61   // ADD, R5, R5, #1    Adds a 1 for two's complement
 1B44   // ADD, R5, R5, R4    Checks if the second number is larger than the first number (condition for all pairs to be sorted)
 0C05   // BRnz, #5           If the result is negative the above is true and we can skip the swap
-6E19   // LDR, R7, R0, #25   
-6C59   // LDR, R6, R1, #25
-7E59   // STR, R7, R1, #25
-7C19   // STR, R6, R0, #25
-0FEE   // Br, #-18
-1021   // ADD, R0, R0, #1
-1261   // ADD, R1, R1, #1
-0FEE   // Br, #-18
-F000   // HALT
-0006   // 0006
-0001   // 0001
-0002   // 0002
-0000   // 0000
-0005   // 0001
+6A19   // LDR, R5, R0, #25   Reloads the first value into R5 
+6C59   // LDR, R6, R1, #25   Reloads the second value into R6
+7A59   // STR, R5, R1, #25   Performs a swap
+7C19   // STR, R6, R0, #25   Performs a swap
+0FEE   // Br, #-18           Branches back to the top of the loop to check for a sorted array
+1021   // ADD, R0, R0, #1    Adds one to the first pointer
+1261   // ADD, R1, R1, #1    Adds one to the second pointer
+0FEE   // Br, #-18           Branches back to the top of the loop to check for a sorted array
+F000   // HALT               Stop the program, we have a sorted array
+0006   // 0006               Always set to the amount of numbers plus one, modify this user input as needed
+0001   // 0001               Always 1, do not change
+0002   // 0002               Always 2, do not change
+0000   // 0000               Padding for offset, do not change
+0005   // 0001               User inputs numbers onwards
 0004   // 0002
 0003   // 0004
 0002   // 0003

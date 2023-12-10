@@ -217,13 +217,31 @@ module PUnCTATest;
 		`ASSERT_REG_EQ(1, 16'd3);
 		`ASSERT_MEM_EQ(23, 16'd3);
 
+/*
+		This is our version of a sort. It increments through a 
+		location in memory for a specified number of elemnents.
+		It has 2 pointers, one for pointing to a leader and another
+		for a follower. If the leader is smaller than the follower,
+		it performas a memory swap. Every time it encounters a swap,
+		the pointers are reset to the beginning. Once it increments
+		through the entire list, it stop looping and reach a HALT 
+		state with the sorted list in memory.
 
-		// This is our version of a sort. It increments through a 
-		// location in memory for a specified number of elemnents.
-		// It has 2 pointers, one for pointing to a leader and another
-		// for a follower. If the leader is smaller than the follower,
-		// it performas a memory swap. Every time it encounters a swap,
-		// the pointers are reset 
+		We use the following instructions to meet the unique instruction
+		count requirement of 10:
+
+		1. LD
+		2. NOT
+		3. ADDI
+		4. ADDR
+		5. BRz
+		6. LDR
+		7. BRnz
+		8. STR
+		9. Br
+		10. HALT
+		
+*/
 		`START_TEST("sort");
 		`WAIT_PC_FREEZE;
 		`ASSERT_MEM_EQ(16'd26, 16'd1);
