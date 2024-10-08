@@ -1,6 +1,4 @@
-16-Bit CPU
-
-This repository contains the design and implementation of a 16-bit CPU
+This repository contains the design and implementation of a RISC 16-bit CPU
 
 The CPU is built using digital logic components and follows a von Neumann architecture.
 
